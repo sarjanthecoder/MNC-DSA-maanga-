@@ -1,0 +1,772 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DSA Interview Prep - Top MNC Questions</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: #0a0e27;
+            color: #fff;
+            overflow-x: hidden;
+        }
+
+        /* Navbar */
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: rgba(10, 14, 39, 0.8);
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            padding: 1rem 2rem;
+            z-index: 1000;
+            transition: all 0.3s;
+        }
+
+        nav.scrolled {
+            background: rgba(10, 14, 39, 0.95);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+        }
+
+        .nav-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: 800;
+            background: linear-gradient(135deg, #60a5fa, #a78bfa);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+        }
+
+        .nav-links a {
+            color: #94a3b8;
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.3s;
+            position: relative;
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: linear-gradient(90deg, #60a5fa, #a78bfa);
+            transition: width 0.3s;
+        }
+
+        .nav-links a:hover {
+            color: #fff;
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        /* Hero Section */
+        .hero {
+            position: relative;
+            min-height: 100vh;
+            background: linear-gradient(135deg, #0a0e27 0%, #1a1f3a 50%, #0f1428 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+            padding-top: 80px;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            width: 150%;
+            height: 150%;
+            background: radial-gradient(circle at 30% 50%, rgba(59, 130, 246, 0.15) 0%, transparent 50%),
+                        radial-gradient(circle at 70% 50%, rgba(139, 92, 246, 0.15) 0%, transparent 50%);
+            animation: pulse 8s ease-in-out infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1) rotate(0deg); opacity: 0.5; }
+            50% { transform: scale(1.1) rotate(5deg); opacity: 0.8; }
+        }
+
+        .grid-bg {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background-image: 
+                linear-gradient(rgba(59, 130, 246, 0.05) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(59, 130, 246, 0.05) 1px, transparent 1px);
+            background-size: 50px 50px;
+            animation: gridMove 20s linear infinite;
+        }
+
+        @keyframes gridMove {
+            0% { transform: translate(0, 0); }
+            100% { transform: translate(50px, 50px); }
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 2;
+            text-align: center;
+            max-width: 1200px;
+            padding: 2rem;
+        }
+
+        .hero-title {
+            font-size: 4rem;
+            font-weight: 900;
+            background: linear-gradient(135deg, #60a5fa, #a78bfa, #60a5fa);
+            background-size: 200% 200%;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            animation: gradientShift 3s ease infinite;
+            margin-bottom: 1rem;
+            text-shadow: 0 0 40px rgba(96, 165, 250, 0.5);
+        }
+
+        @keyframes gradientShift {
+            0%, 100% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+        }
+
+        .hero-subtitle {
+            font-size: 1.5rem;
+            color: #94a3b8;
+            margin-bottom: 3rem;
+            line-height: 1.6;
+        }
+
+        .cta-buttons {
+            display: flex;
+            gap: 1.5rem;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            padding: 1rem 2.5rem;
+            border-radius: 50px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            text-decoration: none;
+            transition: all 0.3s;
+            border: none;
+            cursor: pointer;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, #60a5fa, #a78bfa);
+            color: #fff;
+            box-shadow: 0 10px 30px rgba(96, 165, 250, 0.4);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 40px rgba(96, 165, 250, 0.6);
+        }
+
+        .btn-secondary {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(10px);
+            color: #fff;
+            border: 2px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .btn-secondary:hover {
+            background: rgba(255, 255, 255, 0.1);
+            border-color: rgba(255, 255, 255, 0.4);
+            transform: translateY(-3px);
+        }
+
+        /* Companies Section */
+        .companies-section {
+            position: relative;
+            padding: 6rem 2rem;
+            background: linear-gradient(180deg, #0a0e27 0%, #13172e 100%);
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 3rem;
+            font-weight: 800;
+            margin-bottom: 1rem;
+            background: linear-gradient(135deg, #60a5fa, #a78bfa);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .section-subtitle {
+            text-align: center;
+            color: #94a3b8;
+            font-size: 1.2rem;
+            margin-bottom: 4rem;
+        }
+
+        .companies-grid {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+        }
+
+        .company-card {
+            background: rgba(255, 255, 255, 0.03);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 20px;
+            padding: 2rem;
+            position: relative;
+            overflow: hidden;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            cursor: pointer;
+        }
+
+        .company-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: linear-gradient(90deg, transparent, var(--glow-color), transparent);
+            opacity: 0;
+            transition: opacity 0.4s;
+        }
+
+        .company-card:hover {
+            transform: translateY(-10px);
+            border-color: rgba(255, 255, 255, 0.3);
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+        }
+
+        .company-card:hover::before {
+            opacity: 1;
+        }
+
+        .company-card:nth-child(1) { --glow-color: #4285f4; }
+        .company-card:nth-child(2) { --glow-color: #ff9900; }
+        .company-card:nth-child(3) { --glow-color: #0668e1; }
+        .company-card:nth-child(4) { --glow-color: #e50914; }
+        .company-card:nth-child(5) { --glow-color: #a6a6a6; }
+        .company-card:nth-child(6) { --glow-color: #00a4ef; }
+        .company-card:nth-child(7) { --glow-color: #ff0000; }
+        .company-card:nth-child(8) { --glow-color: #7c3aed; }
+        .company-card:nth-child(9) { --glow-color: #06b6d4; }
+        .company-card:nth-child(10) { --glow-color: #10b981; }
+        .company-card:nth-child(11) { --glow-color: #f59e0b; }
+        .company-card:nth-child(12) { --glow-color: #ec4899; }
+
+        .company-header {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .company-icon {
+            width: 60px;
+            height: 60px;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            font-weight: 700;
+        }
+
+        .company-name {
+            font-size: 1.5rem;
+            font-weight: 700;
+        }
+
+        .questions-list {
+            list-style: none;
+            margin-bottom: 1.5rem;
+        }
+
+        .questions-list li {
+            padding: 0.8rem 0;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+            color: #94a3b8;
+            font-size: 0.95rem;
+            display: flex;
+            align-items: flex-start;
+            gap: 0.5rem;
+        }
+
+        .questions-list li::before {
+            content: '▹';
+            color: #60a5fa;
+            font-size: 1.2rem;
+            flex-shrink: 0;
+        }
+
+        .download-btn {
+            width: 100%;
+            padding: 0.8rem;
+            background: linear-gradient(135deg, #60a5fa, #a78bfa);
+            border: none;
+            border-radius: 10px;
+            color: #fff;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+        }
+
+        .download-btn:hover {
+            transform: scale(1.05);
+            box-shadow: 0 10px 30px rgba(96, 165, 250, 0.4);
+        }
+
+        /* Footer */
+        footer {
+            background: #060816;
+            padding: 3rem 2rem 1rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .footer-content {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 3rem;
+            margin-bottom: 2rem;
+        }
+
+        .footer-section h3 {
+            font-size: 1.3rem;
+            margin-bottom: 1rem;
+            background: linear-gradient(135deg, #60a5fa, #a78bfa);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .footer-section p, .footer-links {
+            color: #94a3b8;
+            line-height: 1.8;
+        }
+
+        .footer-links {
+            list-style: none;
+        }
+
+        .footer-links a {
+            color: #94a3b8;
+            text-decoration: none;
+            transition: all 0.3s;
+        }
+
+        .footer-links a:hover {
+            color: #60a5fa;
+            padding-left: 5px;
+        }
+
+        .social-links {
+            display: flex;
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+
+        .social-links a {
+            width: 40px;
+            height: 40px;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #94a3b8;
+            text-decoration: none;
+            transition: all 0.3s;
+        }
+
+        .social-links a:hover {
+            background: linear-gradient(135deg, #60a5fa, #a78bfa);
+            color: #fff;
+            transform: translateY(-3px);
+        }
+
+        .footer-bottom {
+            text-align: center;
+            padding-top: 2rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.05);
+            color: #64748b;
+        }
+
+        /* Mobile Menu */
+        .mobile-menu-btn {
+            display: none;
+            background: none;
+            border: none;
+            color: #fff;
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+            }
+
+            .mobile-menu-btn {
+                display: block;
+            }
+
+            .hero-title {
+                font-size: 2.5rem;
+            }
+
+            .hero-subtitle {
+                font-size: 1.2rem;
+            }
+
+            .section-title {
+                font-size: 2rem;
+            }
+
+            .companies-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav id="navbar">
+        <div class="nav-container">
+            <div class="logo">DSA Prep</div>
+            <ul class="nav-links">
+                <li><a href="#home">Home</a></li>
+                <li><a href="#companies">Companies</a></li>
+                <li><a href="#resources">Resources</a></li>
+                <li><a href="#about">About</a></li>
+            </ul>
+            <button class="mobile-menu-btn">☰</button>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero" id="home">
+        <div class="grid-bg"></div>
+        <div class="hero-content">
+            <h1 class="hero-title">Master DSA Interviews</h1>
+            <p class="hero-subtitle">Ace coding interviews at top tech companies with curated DSA questions<br>from Google, Amazon, Meta, Microsoft, and more!</p>
+            <div class="cta-buttons">
+                <a href="#companies" class="btn btn-primary">
+                    <span>📚</span> Explore Questions
+                </a>
+                <a href="#" class="btn btn-secondary">
+                    <span>⬇️</span> Download All
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Companies Section -->
+    <section class="companies-section" id="companies">
+        <h2 class="section-title">Top MNC Interview Questions</h2>
+        <p class="section-subtitle">Handpicked DSA problems from the most sought-after tech companies</p>
+        
+        <div class="companies-grid">
+            <!-- Google -->
+            <div class="company-card">
+                <div class="company-header">
+                    <div class="company-icon">G</div>
+                    <h3 class="company-name">Google</h3>
+                </div>
+                <ul class="questions-list">
+                    <li>Two Sum Problem</li>
+                    <li>Longest Substring Without Repeating</li>
+                    <li>Merge K Sorted Lists</li>
+                    <li>Binary Tree Maximum Path Sum</li>
+                    <li>Word Ladder Problem</li>
+                </ul>
+                <button class="download-btn">⬇️ Download PDF</button>
+            </div>
+
+            <!-- Amazon -->
+            <div class="company-card">
+                <div class="company-header">
+                    <div class="company-icon">A</div>
+                    <h3 class="company-name">Amazon</h3>
+                </div>
+                <ul class="questions-list">
+                    <li>Longest Palindromic Substring</li>
+                    <li>Trapping Rain Water</li>
+                    <li>LRU Cache Implementation</li>
+                    <li>Number of Islands</li>
+                    <li>Course Schedule Problem</li>
+                </ul>
+                <button class="download-btn">⬇️ Download PDF</button>
+            </div>
+
+            <!-- Meta -->
+            <div class="company-card">
+                <div class="company-header">
+                    <div class="company-icon">M</div>
+                    <h3 class="company-name">Meta</h3>
+                </div>
+                <ul class="questions-list">
+                    <li>Valid Parentheses</li>
+                    <li>Add Two Numbers (Linked List)</li>
+                    <li>Product of Array Except Self</li>
+                    <li>Binary Tree Vertical Order</li>
+                    <li>Serialize and Deserialize Tree</li>
+                </ul>
+                <button class="download-btn">⬇️ Download PDF</button>
+            </div>
+
+            <!-- Netflix -->
+            <div class="company-card">
+                <div class="company-header">
+                    <div class="company-icon">N</div>
+                    <h3 class="company-name">Netflix</h3>
+                </div>
+                <ul class="questions-list">
+                    <li>Maximum Subarray Sum</li>
+                    <li>Find Median from Data Stream</li>
+                    <li>Top K Frequent Elements</li>
+                    <li>Design Twitter Timeline</li>
+                    <li>Sliding Window Maximum</li>
+                </ul>
+                <button class="download-btn">⬇️ Download PDF</button>
+            </div>
+
+            <!-- Apple -->
+            <div class="company-card">
+                <div class="company-header">
+                    <div class="company-icon">🍎</div>
+                    <h3 class="company-name">Apple</h3>
+                </div>
+                <ul class="questions-list">
+                    <li>Reverse Linked List</li>
+                    <li>Validate Binary Search Tree</li>
+                    <li>Clone Graph</li>
+                    <li>Word Search in Matrix</li>
+                    <li>Design HashMap</li>
+                </ul>
+                <button class="download-btn">⬇️ Download PDF</button>
+            </div>
+
+            <!-- Microsoft -->
+            <div class="company-card">
+                <div class="company-header">
+                    <div class="company-icon">⊞</div>
+                    <h3 class="company-name">Microsoft</h3>
+                </div>
+                <ul class="questions-list">
+                    <li>Rotate Array</li>
+                    <li>Implement Trie (Prefix Tree)</li>
+                    <li>Lowest Common Ancestor</li>
+                    <li>Merge Intervals</li>
+                    <li>Design Browser History</li>
+                </ul>
+                <button class="download-btn">⬇️ Download PDF</button>
+            </div>
+
+            <!-- Adobe -->
+            <div class="company-card">
+                <div class="company-header">
+                    <div class="company-icon">Ad</div>
+                    <h3 class="company-name">Adobe</h3>
+                </div>
+                <ul class="questions-list">
+                    <li>3Sum Problem</li>
+                    <li>Container With Most Water</li>
+                    <li>Coin Change Problem</li>
+                    <li>Group Anagrams</li>
+                    <li>Palindrome Partitioning</li>
+                </ul>
+                <button class="download-btn">⬇️ Download PDF</button>
+            </div>
+
+            <!-- Uber -->
+            <div class="company-card">
+                <div class="company-header">
+                    <div class="company-icon">U</div>
+                    <h3 class="company-name">Uber</h3>
+                </div>
+                <ul class="questions-list">
+                    <li>Meeting Rooms II</li>
+                    <li>Design Ride Sharing System</li>
+                    <li>Valid Sudoku</li>
+                    <li>Kth Largest Element</li>
+                    <li>Generate Parentheses</li>
+                </ul>
+                <button class="download-btn">⬇️ Download PDF</button>
+            </div>
+
+            <!-- LinkedIn -->
+            <div class="company-card">
+                <div class="company-header">
+                    <div class="company-icon">in</div>
+                    <h3 class="company-name">LinkedIn</h3>
+                </div>
+                <ul class="questions-list">
+                    <li>Maximum Product Subarray</li>
+                    <li>Design URL Shortener</li>
+                    <li>Search in Rotated Array</li>
+                    <li>Copy List with Random Pointer</li>
+                    <li>Evaluate Reverse Polish</li>
+                </ul>
+                <button class="download-btn">⬇️ Download PDF</button>
+            </div>
+
+            <!-- Spotify -->
+            <div class="company-card">
+                <div class="company-header">
+                    <div class="company-icon">♫</div>
+                    <h3 class="company-name">Spotify</h3>
+                </div>
+                <ul class="questions-list">
+                    <li>Design Music Playlist</li>
+                    <li>Implement Queue using Stacks</li>
+                    <li>Find Peak Element</li>
+                    <li>Decode String</li>
+                    <li>Shuffle an Array</li>
+                </ul>
+                <button class="download-btn">⬇️ Download PDF</button>
+            </div>
+
+            <!-- Oracle -->
+            <div class="company-card">
+                <div class="company-header">
+                    <div class="company-icon">O</div>
+                    <h3 class="company-name">Oracle</h3>
+                </div>
+                <ul class="questions-list">
+                    <li>Implement LFU Cache</li>
+                    <li>Design Database Schema</li>
+                    <li>Flatten Nested List Iterator</li>
+                    <li>Find Duplicate Number</li>
+                    <li>Design Rate Limiter</li>
+                </ul>
+                <button class="download-btn">⬇️ Download PDF</button>
+            </div>
+
+            <!-- Salesforce -->
+            <div class="company-card">
+                <div class="company-header">
+                    <div class="company-icon">S</div>
+                    <h3 class="company-name">Salesforce</h3>
+                </div>
+                <ul class="questions-list">
+                    <li>Design CRM System</li>
+                    <li>Word Break Problem</li>
+                    <li>Permutations</li>
+                    <li>Spiral Matrix</li>
+                    <li>Design Task Scheduler</li>
+                </ul>
+                <button class="download-btn">⬇️ Download PDF</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3>DSA Interview Prep</h3>
+                <p>Your ultimate resource for mastering data structures and algorithms for top tech company interviews.</p>
+                <div class="social-links">
+                    <a href="#">𝕏</a>
+                    <a href="#">in</a>
+                    <a href="#">f</a>
+                    <a href="#">📧</a>
+                </div>
+            </div>
+            
+            <div class="footer-section">
+                <h3>Quick Links</h3>
+                <ul class="footer-links">
+                    <li><a href="#home">Home</a></li>
+                    <li><a href="#companies">Companies</a></li>
+                    <li><a href="#resources">Resources</a></li>
+                    <li><a href="#about">About Us</a></li>
+                </ul>
+            </div>
+            
+            
+            
+
+        
+        <div class="footer-bottom">
+            <p>&copy; 2025 DSA Interview Prep. All rights reserved. Built with 💙 for developers.</p>
+        </div>
+    </footer>
+
+    <script>
+        // Navbar scroll effect
+        window.addEventListener('scroll', () => {
+            const navbar = document.getElementById('navbar');
+            if (window.scrollY > 50) {
+                navbar.classList.add('scrolled');
+            } else {
+                navbar.classList.remove('scrolled');
+            }
+        });
+
+        // Smooth scroll
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Download button functionality
+        document.querySelectorAll('.download-btn').forEach(btn => {
+            btn.addEventListener('click', function() {
+                const companyName = this.closest('.company-card').querySelector('.company-name').textContent;
+                alert(`Downloading ${companyName} DSA Questions PDF...\n\nThis is a demo. In production, this would trigger a real PDF download.`);
+            });
+        });
+
+        // Download all button
+        document.querySelector('.btn-secondary').addEventListener('click', function(e) {
+            e.preventDefault();
+            alert('Downloading complete DSA question bank for all companies...\n\nThis is a demo. In production, this would trigger a comprehensive PDF download.');
+        });
+    </script>
+</body>
+</html>
