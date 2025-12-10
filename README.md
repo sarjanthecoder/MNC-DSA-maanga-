@@ -12,6 +12,7 @@ A stunning, modern landing page for Data Structures and Algorithms interview pre
 
 
 
+
 ### 🎯 Core Functionality
 - **Interactive Landing Page** - Eye-catching hero section with animated gradients
 - **12 Top Tech Companies** - Curated DSA questions from industry leaders
